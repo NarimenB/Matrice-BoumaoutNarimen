@@ -2,11 +2,15 @@ import { useState } from "react";
 import { useSessions } from "./hooks/useSessions";
 import { FiltersBar } from "./components/FiltersBar";
 import { SessionList } from "./components/SessionList";
+import { SessionDetail } from "./components/SessionDetail";
 
 export default function App() {
   const [selectedId, setSelectedId] = useState(null);
 
-  const { filters, setFilter, sessions, status, error, retry } = useSessions();
+  const { filters, setFilter, sessions, status, error, retry, updateStatus } =
+    useSessions();
+
+  const selectedSession = sessions.find((s) => s.id === selectedId) ?? null;
 
   return (
     <div className="min-h-screen bg-slate-50">
@@ -27,6 +31,12 @@ export default function App() {
           onOpenDetail={setSelectedId}
         />
       </main>
+
+      <SessionDetail
+        session={selectedSession}
+        onClose={() => setSelectedId(null)}
+        onChangeStatus={updateStatus}
+      />
     </div>
   );
 }
