@@ -1,0 +1,72 @@
+const GROUP_OPTIONS = [
+  { value: "all", label: "Tous les groupes" },
+  { value: "A", label: "Groupe A" },
+  { value: "B", label: "Groupe B" },
+];
+
+const DOMAIN_OPTIONS = [
+  { value: "all", label: "Tous les domaines" },
+  { value: "web", label: "Web" },
+  { value: "data", label: "Data" },
+  { value: "cyber", label: "Cybersécurité" },
+  { value: "projet", label: "Projet" },
+];
+
+export function FiltersBar({ filters, onChange }) {
+  return (
+    <section
+      aria-label="Filtres du planning"
+      className="flex flex-col gap-3 rounded-lg border border-slate-200 bg-white p-4 sm:flex-row sm:items-end sm:gap-4"
+    >
+      <div className="flex flex-col gap-1">
+        <label htmlFor="filter-group" className="text-sm font-medium text-slate-700">
+          Groupe
+        </label>
+        <select
+          id="filter-group"
+          className="rounded-md border border-slate-300 px-3 py-2 text-sm"
+          value={filters.group}
+          onChange={(e) => onChange("group", e.target.value)}
+        >
+          {GROUP_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="flex flex-col gap-1">
+        <label htmlFor="filter-domain" className="text-sm font-medium text-slate-700">
+          Domaine
+        </label>
+        <select
+          id="filter-domain"
+          className="rounded-md border border-slate-300 px-3 py-2 text-sm"
+          value={filters.domain}
+          onChange={(e) => onChange("domain", e.target.value)}
+        >
+          {DOMAIN_OPTIONS.map((opt) => (
+            <option key={opt.value} value={opt.value}>
+              {opt.label}
+            </option>
+          ))}
+        </select>
+      </div>
+
+      <div className="flex flex-1 flex-col gap-1">
+        <label htmlFor="filter-search" className="text-sm font-medium text-slate-700">
+          Recherche
+        </label>
+        <input
+          id="filter-search"
+          type="text"
+          placeholder="Rechercher un titre de séance"
+          className="rounded-md border border-slate-300 px-3 py-2 text-sm"
+          value={filters.search}
+          onChange={(e) => onChange("search", e.target.value)}
+        />
+      </div>
+    </section>
+  );
+}
