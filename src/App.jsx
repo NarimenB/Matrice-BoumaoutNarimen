@@ -13,10 +13,12 @@ export default function App() {
   const selectedSession = sessions.find((s) => s.id === selectedId) ?? null;
 
   return (
-    <div className="min-h-screen bg-slate-50">
-      <header className="border-b border-slate-200 bg-white">
+    <div className="min-h-screen bg-pink-200">
+      <header className="border-b-4 border-green-700 bg-white">
         <div className="mx-auto max-w-5xl px-4 py-5">
-          <h1 className="text-xl font-bold text-slate-900">MATRiCE — Planning</h1>
+          <h1 className="text-2xl font-bold italic text-green-900">
+            MATRiCE — Planning
+          </h1>
         </div>
       </header>
 

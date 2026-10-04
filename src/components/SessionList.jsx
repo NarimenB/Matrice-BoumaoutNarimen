@@ -3,7 +3,10 @@ import { SessionCard } from "./SessionCard";
 export function SessionList({ sessions, status, error, onRetry, onOpenDetail }) {
   if (status === "loading") {
     return (
-      <p role="status" className="py-10 text-center text-sm text-slate-500">
+      <p
+        role="status"
+        className="rounded-2xl bg-white p-6 text-center text-sm text-green-900"
+      >
         Chargement du planning…
       </p>
     );
@@ -11,14 +14,17 @@ export function SessionList({ sessions, status, error, onRetry, onOpenDetail }) 
 
   if (status === "error") {
     return (
-      <div role="alert" className="flex flex-col items-center gap-3 py-10 text-center">
-        <p className="text-sm text-red-700">
+      <div
+        role="alert"
+        className="flex flex-col items-center gap-3 rounded-2xl bg-white p-6 text-center"
+      >
+        <p className="text-sm text-red-900">
           Une erreur est survenue pendant le chargement du planning.
         </p>
         <button
           type="button"
           onClick={onRetry}
-          className="rounded-md bg-indigo-600 px-4 py-2 text-sm font-medium text-white hover:bg-indigo-500"
+          className="rounded-full bg-green-800 px-4 py-2 text-sm font-semibold text-white hover:bg-green-700 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-800 focus-visible:ring-offset-2"
         >
           Réessayer
         </button>
@@ -28,7 +34,7 @@ export function SessionList({ sessions, status, error, onRetry, onOpenDetail }) 
 
   if (status === "empty") {
     return (
-      <p className="py-10 text-center text-sm text-slate-500">
+      <p className="rounded-2xl bg-white p-6 text-center text-sm text-green-900">
         Aucune séance ne correspond à ces filtres.
       </p>
     );

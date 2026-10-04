@@ -45,9 +45,10 @@ export function SessionDetail({ session, onClose, onChangeStatus }) {
   }, [session, onClose]);
 
   if (!session) return null;
-    return (
+
+  return (
     <div
-      className="fixed inset-0 z-50 flex items-center justify-center bg-slate-900/50 p-4"
+      className="fixed inset-0 z-50 flex items-center justify-center bg-pink-900/40 p-4"
       onClick={onClose}
     >
       <div
@@ -55,40 +56,43 @@ export function SessionDetail({ session, onClose, onChangeStatus }) {
         role="dialog"
         aria-modal="true"
         aria-labelledby="session-detail-title"
-        className="w-full max-w-md rounded-lg bg-white p-6 shadow-xl"
+        className="w-full max-w-md rounded-2xl border-2 border-green-700 bg-white p-6 shadow-xl"
         onClick={(event) => event.stopPropagation()}
       >
         <div className="flex items-start justify-between gap-4">
-          <h2 id="session-detail-title" className="text-lg font-semibold text-slate-900">
+          <h2
+            id="session-detail-title"
+            className="text-lg font-bold italic text-green-900"
+          >
             {session.title}
           </h2>
           <button
             type="button"
             onClick={onClose}
             aria-label="Fermer le détail de la séance"
-            className="rounded p-1 text-slate-500 hover:bg-slate-100"
+            className="rounded-full p-1 text-green-900 hover:bg-pink-100 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-800"
           >
             ✕
           </button>
         </div>
 
-        <dl className="mt-4 space-y-2 text-sm text-slate-700">
+        <dl className="mt-4 space-y-2 text-sm text-slate-900">
           <div>
-            <dt className="font-medium">Domaine</dt>
+            <dt className="font-bold text-green-900">Domaine</dt>
             <dd>{session.domain}</dd>
           </div>
           <div>
-            <dt className="font-medium">Groupe</dt>
+            <dt className="font-bold text-green-900">Groupe</dt>
             <dd>Groupe {session.group}</dd>
           </div>
           <div>
-            <dt className="font-medium">Formateur</dt>
+            <dt className="font-bold text-green-900">Formateur</dt>
             <dd>
               {session.formateurId ? formateurs[session.formateurId] : "Aucun formateur"}
             </dd>
           </div>
           <div>
-            <dt className="font-medium">Statut actuel</dt>
+            <dt className="font-bold text-green-900">Statut actuel</dt>
             <dd>
               <StatusBadge status={session.status} />
             </dd>
@@ -96,12 +100,12 @@ export function SessionDetail({ session, onClose, onChangeStatus }) {
         </dl>
 
         <div className="mt-6 flex flex-col gap-1">
-          <label htmlFor="detail-status" className="text-sm font-medium text-slate-700">
+          <label htmlFor="detail-status" className="text-sm font-bold text-green-900">
             Modifier le statut (local)
           </label>
           <select
             id="detail-status"
-            className="rounded-md border border-slate-300 px-3 py-2 text-sm"
+            className="rounded-lg border-2 border-green-700 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-800"
             value={session.status}
             onChange={(event) => onChangeStatus(session.id, event.target.value)}
           >
