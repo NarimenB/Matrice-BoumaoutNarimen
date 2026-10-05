@@ -1,3 +1,4 @@
+import React from "react";
 import { useState } from "react";
 import { useSessions } from "./hooks/useSessions";
 import { FiltersBar } from "./components/FiltersBar";

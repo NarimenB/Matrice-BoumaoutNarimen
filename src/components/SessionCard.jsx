@@ -1,3 +1,4 @@
+import React from "react";
 import { formateurs } from "../data/sessions";
 import { StatusBadge } from "./StatusBadge";
 

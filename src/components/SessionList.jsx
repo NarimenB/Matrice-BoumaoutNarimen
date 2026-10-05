@@ -1,3 +1,4 @@
+import React from "react";
 import { SessionCard } from "./SessionCard";
 
 export function SessionList({ sessions, status, error, onRetry, onOpenDetail }) {

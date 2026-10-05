@@ -1,3 +1,4 @@
+import React from "react";
 const GROUP_OPTIONS = [
   { value: "all", label: "Tous les groupes" },
   { value: "A", label: "Groupe A" },

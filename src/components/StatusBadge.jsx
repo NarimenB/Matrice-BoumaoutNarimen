@@ -1,3 +1,4 @@
+import React from "react";
 const STATUS_CONFIG = {
   confirmed: {
     label: "Confirmée",
