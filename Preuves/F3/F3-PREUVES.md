@@ -59,13 +59,16 @@ Outil : WebAIM Contrast Checker. Seuil retenu : **4,5:1** (texte normal, WCAG AA
 ## 4. Trois décisions justifiées
 
 ### Hiérarchie carte / détail
-La liste est regroupée par jour (titre de niveau 2), chaque séance est une carte avec son titre (niveau 3), son statut, son domaine, son groupe, sa période et son formateur. Le détail complet s'ouvre dans une modale, à la demande. *(À reformuler avec tes mots : pourquoi la liste reste lisible d'un coup d'œil, pourquoi le détail ne change pas de page.)*
+
+Le sujet demande un affichage minimal sur chaque séance (titre, domaine, groupe, formateur, statut) et un détail qui s'ouvre sur une action. J'ai gardé les cartes courtes pour que la liste se parcoure d'un coup d'œil, surtout à 360 px où les cartes sont empilées sur une colonne. Le détail et la modification du statut sont dans la modale, ouverte à la demande, sans changer de page. La liste est aussi regroupée par jour (titre de niveau 2), ce qui donne un niveau de lecture de plus : jour, séance, détail.
 
 ### Lisibilité des statuts
-Le statut ne repose pas sur la couleur seule : il combine un texte (« Confirmée », « Proposée »), un symbole (✓ ou ○) et une couleur. Le domaine a un badge de forme différente (coins peu arrondis, contre des coins très arrondis pour le statut). Les contrastes des badges sont de 8,29 et 8,20. *(À compléter avec ta raison personnelle.)*
+
+Le statut ne repose pas sur la couleur seule, car une personne qui distingue mal le vert du rose ne verrait pas la différence. J'ai donc ajouté le texte (« Confirmée », « Proposée ») et un symbole (✓ ou ○) : le statut se comprend même sans les couleurs. Le badge de domaine a une forme différente (coins peu arrondis, contre des coins très arrondis pour le statut), pour qu'on ne confonde pas les deux. Les contrastes des badges sont de 8,29 et 8,20.
 
 ### Accès aux actions
-Chaque carte est un vrai `<button>`, donc atteignable avec `Tab` et activable avec `Entrée` sans code supplémentaire. La modale piège le focus, se ferme avec `Echap` et rend le focus à la carte. Le statut se modifie avec un menu natif relié à un label. L'anneau de focus épais (`ring-4`) reste visible sur le fond blanc et sur le fond rose. *(À compléter : pourquoi un bouton plutôt qu'un lien ou une `div` cliquable.)*
+
+Chaque carte est un `<button>` plutôt qu'une `div` cliquable, parce que le navigateur le rend atteignable avec Tab et activable avec Entrée ou Espace sans code supplémentaire, et qu'un lecteur d'écran l'annonce comme un bouton. Avec une `div`, il aurait fallu recréer tout ça à la main. La modale pilote aussi le clavier : le focus y entre à l'ouverture, reste piégé dedans, Echap la ferme, et le focus revient sur la carte. Le statut se modifie avec un menu natif relié à un label. L'anneau de focus épais (`ring-4`) reste visible sur le fond blanc et sur le fond rose.
 
 ## 5. Limites
 
@@ -73,3 +76,4 @@ Chaque carte est un vrai `<button>`, donc atteignable avec `Tab` et activable av
 - Les mesures de contraste portent sur les textes ; je n'ai pas mesuré celui des bordures ni de l'anneau de focus.
 - Seul le champ de recherche est couvert par un test automatique d'accessibilité ; la modale est vérifiée à la main.
 - Les captures de mise en page ont été prises avant la correction du texte d'aide de la recherche : le champ y apparaît encore avec l'ancien gris clair.
+- La modale reprend en grande partie les informations de la carte ; son apport principal est la modification du statut.
