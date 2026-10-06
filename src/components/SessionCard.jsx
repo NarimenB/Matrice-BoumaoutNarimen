@@ -9,6 +9,8 @@ const DOMAIN_LABELS = {
   projet: "Projet",
 };
 
+const PERIOD_LABELS = { am: "Matin", pm: "Après-midi" };
+
 export function SessionCard({ session, onOpenDetail }) {
   const formateurName = session.formateurId
     ? formateurs[session.formateurId]
@@ -25,9 +27,14 @@ export function SessionCard({ session, onOpenDetail }) {
           <h3 className="font-bold text-green-900">{session.title}</h3>
           <StatusBadge status={session.status} />
         </div>
-        <p className="text-sm text-slate-800">
-          {DOMAIN_LABELS[session.domain] ?? session.domain} · Groupe {session.group}
-        </p>
+        <div className="flex flex-wrap items-center gap-2 text-sm text-slate-800">
+          <span className="rounded-md bg-slate-100 px-2 py-0.5 text-xs font-semibold text-slate-900 ring-1 ring-slate-500">
+            {DOMAIN_LABELS[session.domain] ?? session.domain}
+          </span>
+          <span>
+            Groupe {session.group} · {PERIOD_LABELS[session.period] ?? session.period}
+          </span>
+        </div>
         <p className="text-sm text-slate-800">{formateurName}</p>
       </button>
     </li>

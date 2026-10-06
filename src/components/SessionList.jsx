@@ -1,5 +1,6 @@
 import React from "react";
 import { SessionCard } from "./SessionCard";
+import { groupByDay } from "../utils/groupByDay";
 
 export function SessionList({ sessions, status, error, onRetry, onOpenDetail }) {
   if (status === "loading") {
@@ -41,11 +42,29 @@ export function SessionList({ sessions, status, error, onRetry, onOpenDetail }) 
     );
   }
 
+  const days = groupByDay(sessions);
+
   return (
-    <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-      {sessions.map((session) => (
-        <SessionCard key={session.id} session={session} onOpenDetail={onOpenDetail} />
+    <div className="flex flex-col gap-6">
+      {days.map((day) => (
+        <section key={day.date} aria-labelledby={`day-${day.date}`}>
+          <h2
+            id={`day-${day.date}`}
+            className="mb-3 text-lg font-bold italic text-green-900"
+          >
+            {day.label}
+          </h2>
+          <ul className="grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
+            {day.sessions.map((session) => (
+              <SessionCard
+                key={session.id}
+                session={session}
+                onOpenDetail={onOpenDetail}
+              />
+            ))}
+          </ul>
+        </section>
       ))}
-    </ul>
+    </div>
   );
 }
