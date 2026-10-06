@@ -14,7 +14,7 @@ const DOMAIN_OPTIONS = [
 ];
 
 const FIELD_CLASS =
-  "rounded-lg border-2 border-green-700 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-800";
+  "rounded-lg border-2 border-green-700 bg-white px-3 py-2 text-sm text-slate-900 placeholder:text-slate-600 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-800";
 
 export function FiltersBar({ filters, onChange }) {
   return (
