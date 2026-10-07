@@ -34,7 +34,7 @@ Pour chaque preuve, je retire volontairement une ligne du code, je lance le test
 
 ## Suite complète
 
-Commande non interactive : `npm run test`, 9 tests réussis dans 3 fichiers.
+Commande non interactive : `npm run test`, 12 tests réussis dans 4 fichiers.
 
 ![Tests complets](tests-complets.png)
 
@@ -50,6 +50,7 @@ Commande non interactive : `npm run test`, 9 tests réussis dans 3 fichiers.
 | A inclut la Promotion | `filterSessions` avec le groupe A, puis B | A voit A + Promotion, jamais B (et inversement) | séances communes masquées |
 | Nom accessible du filtre | rendu de l'application | un champ de texte nommé « Recherche » | champ inutilisable avec un lecteur d'écran |
 | Utilisation au clavier | trois Tab, puis saisie de « Authentification » | focus sur la recherche, liste filtrée | filtre inaccessible sans souris |
+| Regroupement par jour | séances de plusieurs jours, matin et après-midi mélangés | jours triés, matin avant après-midi, libellé en français, liste vide gérée | liste dans le désordre ou libellés incorrects |
 
 ## Configuration de test
 
