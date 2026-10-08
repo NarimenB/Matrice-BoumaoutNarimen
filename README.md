@@ -13,6 +13,7 @@ Dépôt : https://github.com/NarimenB/Matrice-BoumaoutNarimen
 - Protection contre les réponses obsolètes : si une requête lente répond après une requête plus récente, l'écran reste sur la plus récente.
 - Détail d'une séance dans une modale accessible : le focus est piégé dans la modale, `Echap` la ferme, le focus revient sur la carte.
 - Modification locale du statut d'une séance, cohérente entre la liste et le détail.
+- Règle métier : une séance sans formateur (« Travail autonome ») ne peut pas être confirmée ; l'option « Confirmée » est désactivée dans le détail et la règle est aussi appliquée dans le code.
 - Interface utilisable à 360 px et 1280 px. Le statut se lit par le texte et le symbole (✓ / ○), pas seulement par la couleur.
 
 Les données sont fictives (fournies par le sujet). Il n'y a ni backend, ni base de données, ni authentification.
@@ -58,12 +59,12 @@ Pour les relancer automatiquement à chaque modification :
 npm run test:watch
 ```
 
-La suite contient 12 tests répartis dans 4 fichiers :
+La suite contient 13 tests répartis dans 4 fichiers :
 
 | Fichier | Tests |
 | --- | --- |
 | `src/api/loadSessions.test.js` | le groupe A inclut la Promotion ; le groupe B inclut la Promotion mais pas A |
-| `src/hooks/useSessions.test.jsx` | chargement ; succès ; résultat vide ; erreur puis nouvelle tentative ; réponses dans le désordre |
+| `src/hooks/useSessions.test.jsx` | chargement ; succès ; résultat vide ; erreur puis nouvelle tentative ; réponses dans le désordre ; confirmation sans formateur |
 | `src/App.test.jsx` | nom accessible du champ de recherche ; utilisation du champ de recherche au clavier |
 | `src/utils/groupByDay.test.js` | regroupement par jour trié (matin avant après-midi) ; libellé du jour en français ; liste vide |
 

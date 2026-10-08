@@ -2,7 +2,8 @@
 
 ## Principe
 
-Pour chaque preuve, je retire volontairement une ligne du code, je lance le test (il échoue : **rouge**), je restaure la ligne avec `git restore`, puis je relance le même test (il passe : **vert**). Les défauts sont donc introduits exprès, pour vérifier que les tests détectent bien la panne.
+
+Chaque preuve montre un test **rouge** (il échoue), puis **vert** (il passe après correction). Pour les preuves 1 et 2, je retire volontairement une ligne du code, je lance le test, je restaure la ligne avec `git restore`, puis je relance le même test : les défauts sont introduits exprès, pour vérifier que les tests détectent bien la panne. Pour la preuve 3, le défaut était réel : j'ai écrit le test, il a échoué sur le code d'origine, puis j'ai corrigé le code.
 
 ## Preuve 1 : réponses dans le désordre
 
@@ -32,9 +33,29 @@ Pour chaque preuve, je retire volontairement une ligne du code, je lance le test
 
 ![Vert promotion](vert-promotion.png)
 
+
+
+## Preuve 3 : une confirmation exige un formateur
+
+- **Test** : `useSessions - scénario 7 : confirmation sans formateur` (fichier `src/hooks/useSessions.test.jsx`)
+- **Défaut** : la règle du sujet « une confirmation exige un formateur » n'était pas appliquée : `updateStatus` acceptait de confirmer « Travail autonome » (sans formateur).
+- **Commande** : `npx vitest run src/hooks/useSessions.test.jsx -t "sans formateur"`
+
+**Rouge** : le test, écrit avant la correction, échoue sur le code d'origine avec `expected 'confirmed' to be 'proposed'` (ligne 127) : la séance sans formateur est passée à « confirmed ».
+
+![Rouge formateur](rouge-formateur.png)
+
+**Vert** : après la correction dans `updateStatus` (refus de la confirmation sans formateur), le test passe.
+
+![Vert formateur](vert-formateur.png)
+
+Cette preuve diffère des deux premières : le défaut n'a pas été introduit volontairement, c'était un vrai défaut de mon application, constaté puis corrigé.
+
+
+
 ## Suite complète
 
-Commande non interactive : `npm run test`, 12 tests réussis dans 4 fichiers.
+Commande non interactive : `npm run test`, 13 tests réussis dans 4 fichiers.
 
 ![Tests complets](tests-complets.png)
 
@@ -51,6 +72,7 @@ Commande non interactive : `npm run test`, 12 tests réussis dans 4 fichiers.
 | Nom accessible du filtre | rendu de l'application | un champ de texte nommé « Recherche » | champ inutilisable avec un lecteur d'écran |
 | Utilisation au clavier | trois Tab, puis saisie de « Authentification » | focus sur la recherche, liste filtrée | filtre inaccessible sans souris |
 | Regroupement par jour | séances de plusieurs jours, matin et après-midi mélangés | jours triés, matin avant après-midi, libellé en français, liste vide gérée | liste dans le désordre ou libellés incorrects |
+| Confirmation sans formateur | `updateStatus("s06", "confirmed")` sur une séance sans formateur, puis `updateStatus("s04", "confirmed")` sur une séance avec formateur | s06 reste « proposed », s04 passe à « confirmed » | séance sans formateur confirmée, contre la règle du sujet |
 
 ## Configuration de test
 
@@ -61,9 +83,9 @@ Commande non interactive : `npm run test`, 12 tests réussis dans 4 fichiers.
 
 ## Limites de la stratégie
 
-- Les défauts sont introduits volontairement : les tests prouvent qu'ils détectent ces pannes, pas qu'ils ont découvert des bugs réels.
+- Les preuves 1 et 2 portent sur des défauts introduits volontairement : elles prouvent que les tests détectent ces pannes, pas qu'ils ont découvert des bugs réels. La preuve 3 porte sur un défaut réel de l'application.
 - Les tests du hook remplacent `loadSessions` par un faux loader : le vrai délai de 400 ms n'est pas testé.
 - Le test des réponses dans le désordre utilise de vrais délais (environ 1,3 s) et peut être sensible à la charge de la machine.
 - Aucun test ne vérifie le rendu visuel (couleurs, responsive) : ces points sont couverts par les captures de F3.
 - Les tests de l'interface (`App.test.jsx`) utilisent le vrai `loadSessions` avec son délai de 400 ms : ils sont plus lents et dépendent de ce délai.
-- Seul le champ de recherche est vérifié pour le nom accessible et le clavier ; les deux menus (groupe, domaine) et la modale sont testés à la main (protocole clavier de F3), pas par des tests automatiques.
+- Seul le champ de recherche est vérifié pour le nom accessible et le clavier ; les deux menus (groupe, domaine) et la modale sont testés à la main (protocole clavier de F3), pas par des tests automatiques. L'option « Confirmée » désactivée dans la modale a aussi été vérifiée à la main.
