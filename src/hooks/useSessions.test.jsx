@@ -108,3 +108,27 @@ describe("useSessions - scénario 6 : réponses dans le désordre", () => {
     expect(result.current.sessions[0]?.id).toBe("B");
   }, 3000);
 });
+
+const SAMPLE_FORMATEUR = [
+  { id: "s04", title: "Authentification", formateurId: "t2", status: "proposed" },
+  { id: "s06", title: "Travail autonome", formateurId: null, status: "proposed" },
+];
+
+describe("useSessions - scénario 7 : confirmation sans formateur", () => {
+  test("une séance sans formateur ne peut pas être confirmée, une séance avec formateur le peut", async () => {
+    const loader = makeLoader({ delayMs: 10, result: SAMPLE_FORMATEUR });
+    const { result } = renderHook(() => useSessions({ loader }));
+
+    await waitFor(() => expect(result.current.status).toBe("success"));
+
+    act(() => {
+      result.current.updateStatus("s06", "confirmed");
+    });
+    expect(result.current.sessions.find((s) => s.id === "s06").status).toBe("proposed");
+
+    act(() => {
+      result.current.updateStatus("s04", "confirmed");
+    });
+    expect(result.current.sessions.find((s) => s.id === "s04").status).toBe("confirmed");
+  });
+});

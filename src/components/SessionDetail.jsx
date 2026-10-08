@@ -100,7 +100,7 @@ export function SessionDetail({ session, onClose, onChangeStatus }) {
           </div>
         </dl>
 
-        <div className="mt-6 flex flex-col gap-1">
+                <div className="mt-6 flex flex-col gap-1">
           <label htmlFor="detail-status" className="text-sm font-bold text-green-900">
             Modifier le statut (local)
           </label>
@@ -109,10 +109,18 @@ export function SessionDetail({ session, onClose, onChangeStatus }) {
             className="rounded-lg border-2 border-green-700 bg-white px-3 py-2 text-sm text-slate-900 focus:outline-none focus-visible:ring-4 focus-visible:ring-green-800"
             value={session.status}
             onChange={(event) => onChangeStatus(session.id, event.target.value)}
+            aria-describedby={session.formateurId ? undefined : "detail-status-help"}
           >
             <option value="proposed">Proposée</option>
-            <option value="confirmed">Confirmée</option>
+            <option value="confirmed" disabled={!session.formateurId}>
+              Confirmée
+            </option>
           </select>
+          {!session.formateurId && (
+            <p id="detail-status-help" className="text-sm text-green-900">
+              Une séance sans formateur ne peut pas être confirmée.
+            </p>
+          )}
         </div>
       </div>
     </div>

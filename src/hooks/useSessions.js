@@ -51,10 +51,14 @@ export function useSessions({ loader = realLoadSessions } = {}) {
 
   const updateStatus = useCallback((sessionId, newStatus) => {
     setSessions((prev) =>
-      prev.map((s) => (s.id === sessionId ? { ...s, status: newStatus } : s))
+      prev.map((s) => {
+        if (s.id !== sessionId) return s;
+        // Règle du sujet : une confirmation exige un formateur
+        if (newStatus === "confirmed" && !s.formateurId) return s;
+        return { ...s, status: newStatus };
+      })
     );
   }, []);
-
   return {
     filters,
     setFilter,
