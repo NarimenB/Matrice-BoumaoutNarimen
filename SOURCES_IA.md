@@ -11,10 +11,10 @@ J'ai écrit moi-même la plupart des composants et les tests. J'ai utilisé Clau
 | Partie | Fichiers | Ce que j'ai fait | Ce que Claude a fait |
 | --- | --- | --- | --- |
 | Composants | `StatusBadge.jsx`, `FiltersBar.jsx`, `SessionCard.jsx`, `SessionList.jsx` | Écrits par moi |  relectures |
-| Modale | `SessionDetail.jsx` | Début écrit par moi | Suite : gestion du focus (piège, Echap, retour du focus) |
+| Modale | `SessionDetail.jsx` |  écrit par moi | Relecture(En vas d'erreur de ma part) |
 | Données | `src/data/sessions.js` | Contenu fourni par le sujet  |  |
-| Chargement et filtre | `src/api/loadSessions.js` | Le reste du fichier, dont le filtre ; exécution, tests, preuve rouge puis verte | La fonction asynchrone `loadSessions` (`Promise` et `setTimeout`), que je n'avais pas réussi à écrire, avec son explication |
-| Hook | `src/hooks/useSessions.js` | Le reste du hook ; exécution, tests, preuve rouge puis verte | La partie `useEffect`, que je n'avais pas réussi à écrire, avec son explication (dont le compteur `requestIdRef`) |
+| Chargement et filtre | `src/api/loadSessions.js` | Le reste du fichier, dont le filtre ; exécution, tests, preuve rouge puis verte |Aide sur la fonction asynchrone `loadSessions` (`Promise` et `setTimeout`) |
+| Hook | `src/hooks/useSessions.js` | Le reste du hook ; exécution, tests, preuve rouge puis verte | aide sur la partie `useEffect` (dont le compteur `requestIdRef`) |
 | Tests | `src/**/*.test.js(x)`, `src/test/setup.js` | Écrits par moi | Relecture : je les lui ai montrés pour vérifier qu'ils étaient corrects |
 | Documentation | `README.md`, `JUSTIFICATIONS.md`, `Preuves/*` | Contenu, captures, mesures, vérifications | Aide pour la structure des documents |
 
@@ -32,8 +32,7 @@ J'ai écrit moi-même la plupart des composants et les tests. J'ai utilisé Clau
 
 Chaque point est parti d'une erreur ou d'un constat de ma part :
 - `React is not defined` dans les tests : `import React from "react"` ajouté dans les fichiers JSX.
-- Tailwind 4 installé par défaut : retour à la version 3.4.
-- `lang="en"` hérité de Vite : remplacé par `lang="fr"`.
+
 - Texte d'aide de la recherche trop pâle (mesuré à 2,53:1) : `placeholder:text-slate-600`.
 - Documentation incohérente sur le nombre de tests : corrigée.
 
